@@ -17,7 +17,7 @@ public class DoorAnimationTrigger : MonoBehaviour
     {
         if (playing && !alreadyPlayed)
         {
-            animator.Play("Base Layer.GameSceneDoor", 0);
+            animator.SetBool("Open", true);
             alreadyPlayed = true;
         }
     }
