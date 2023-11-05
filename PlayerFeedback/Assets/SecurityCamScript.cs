@@ -43,7 +43,6 @@ public class SecurityCamScript : MonoBehaviour
             if (resetter)
             {
                 Reconnecting();
-                resetter = false;
             }
         }
     }
@@ -88,9 +87,8 @@ public class SecurityCamScript : MonoBehaviour
             CamOneAuxUI.SetActive(false);
             timer -= Time.deltaTime;
         }
-        if (timer <= 0)
+        if (timer <= 0 && !resetter)
         {
-            Debug.Log("set");
             resetter = true;
             secondTimer = Random.Range(0.25f, 1.0f);
             CamOneAuxUI.SetActive(true);
@@ -103,9 +101,9 @@ public class SecurityCamScript : MonoBehaviour
         {
             secondTimer -= Time.deltaTime;
         }
-        if (secondTimer <= 0)
+        if (secondTimer <= 0 && resetter)
         {
-            Debug.Log("Reset");
+            resetter = false;
             timer = Random.Range(minTime, maxTime);
         }
     }
