@@ -21,6 +21,8 @@ public class SecurityCamScript : MonoBehaviour
     public float secondTimer;
     bool resetter = false;
 
+    public bool switchTriggered = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +68,8 @@ public class SecurityCamScript : MonoBehaviour
         CamTwoUI.SetActive(true);
         CamOneActive = false;
         CamOneAuxUI.SetActive(false);
+
+        switchTriggered = true;
     }
 
     public void ExitConsole()
