@@ -52,7 +52,6 @@ public class SecurityCamScript : MonoBehaviour
     public void UseCamOne()
     {
         secCamOne.depth = 2.0f;
-        Debug.Log(secCamOne.depth);
         secCamTwo.depth = 0f;
 
         CamOneUI.SetActive(true);
