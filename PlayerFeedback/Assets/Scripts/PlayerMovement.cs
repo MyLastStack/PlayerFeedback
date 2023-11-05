@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] InputAction interactAction, pauseAction;
+    [SerializeField] GameObject camCanvas;
     public bool interactable;
     public bool interacting;
     public bool pausing;
@@ -42,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!interacting || !pausing)
+        if (!interacting)
         {
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -56,18 +57,6 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 rb.drag = 0;
-            }
-        }
-
-        if (pauseAction.WasPressedThisFrame())
-        {
-            if (pausing)
-            {
-                UnpausingScene();
-            }
-            else
-            {
-                PausingScene();
             }
         }
     }
@@ -122,6 +111,7 @@ public class PlayerMovement : MonoBehaviour
     public void onInteract()
     {
         interacting = true;
+        camCanvas.GetComponent<SecurityCamScript>().UseCamOne();
     }
     
     public void offInteract()

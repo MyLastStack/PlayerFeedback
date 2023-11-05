@@ -24,7 +24,7 @@ public class PlayerCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.GetComponent<PlayerMovement>().interacting || player.GetComponent<PlayerMovement>().pausing)
+        if (player.GetComponent<PlayerMovement>().interacting)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
