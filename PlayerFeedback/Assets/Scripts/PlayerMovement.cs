@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] InputAction interactAction;
+    public bool interactable;
+    public bool interacting;
+
     [Header("Movement")]
     public float moveSpeed;
 
@@ -25,24 +31,31 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        interactable = false;
+        interacting = false;
+
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
     }
 
     void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
-        KeyboardInputs();
-        SpeedControl();
-
-        if (grounded)
+        if (!interacting)
         {
-            rb.drag = groundDrag;
-        }
-        else
-        {
-            rb.drag = 0;
+            grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+
+
+            KeyboardInputs();
+            SpeedControl();
+
+            if (grounded)
+            {
+                rb.drag = groundDrag;
+            }
+            else
+            {
+                rb.drag = 0;
+            }
         }
     }
 
@@ -55,8 +68,14 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (interactable && interactAction.WasReleasedThisFrame())
+        {
+            onInteract();
+        }
     }
 
+    #region Player Movement
     private void MovePlayer()
     {
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
@@ -74,4 +93,29 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
+    #endregion
+
+    #region Player Interaction
+    public void onInteract()
+    {
+        interacting = true;
+    }
+    
+    public void offInteract()
+    {
+        interacting = false;
+    }
+    #endregion
+
+    #region Enable and Disable
+    private void OnEnable()
+    {
+        interactAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        interactAction.Disable();
+    }
+    #endregion
 }

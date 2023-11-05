@@ -19,7 +19,7 @@ public class LightsFlicker : MonoBehaviour
 
     void Update()
     {
-        
+        lightsFlickering();
     }
 
     void lightsFlickering()
