@@ -148,7 +148,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14691652}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &14691654
 Camera:
   m_ObjectHideFlags: 0
@@ -618,7 +618,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200957865}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &200957867
 Camera:
   m_ObjectHideFlags: 0
@@ -1037,7 +1037,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 302679395}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2147147177}
+        m_TargetAssemblyTypeName: SecurityCamScript, Assembly-CSharp
+        m_MethodName: UseCamTwo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &302679395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7141,6 +7153,7 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  camCanvas: {fileID: 2147147175}
   interactable: 0
   interacting: 0
   pausing: 0
@@ -9470,7 +9483,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1627970094}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2147147177}
+        m_TargetAssemblyTypeName: SecurityCamScript, Assembly-CSharp
+        m_MethodName: ExitConsole
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1627970094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9591,7 +9616,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1631316921}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2147147177}
+        m_TargetAssemblyTypeName: SecurityCamScript, Assembly-CSharp
+        m_MethodName: UseCamOne
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1631316921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11360,9 +11397,7 @@ MonoBehaviour:
   CamOneUI: {fileID: 643242444}
   CamOneAuxUI: {fileID: 1740592419}
   CamTwoUI: {fileID: 2078129991}
-  minTime: 0
-  maxTime: 0
-  timer: 0
+  player: {fileID: 759426382}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

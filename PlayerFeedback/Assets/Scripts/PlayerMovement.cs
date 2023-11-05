@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        camCanvas.SetActive(false);
+
         interactable = false;
         interacting = false;
         pausing = false;
@@ -111,12 +113,14 @@ public class PlayerMovement : MonoBehaviour
     public void onInteract()
     {
         interacting = true;
+        camCanvas.SetActive(true);
         camCanvas.GetComponent<SecurityCamScript>().UseCamOne();
     }
     
     public void offInteract()
     {
         interacting = false;
+        camCanvas.SetActive(false);
     }
     #endregion
 

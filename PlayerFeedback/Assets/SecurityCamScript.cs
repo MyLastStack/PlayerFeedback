@@ -11,11 +11,15 @@ public class SecurityCamScript : MonoBehaviour
     [SerializeField] GameObject CamOneAuxUI;
     [SerializeField] GameObject CamTwoUI;
 
+    [SerializeField] GameObject player;
+
     bool CamOneActive = false;
 
     float minTime = 0.5f;
     float maxTime = 2.0f;
-    float timer;
+    public float timer;
+    public float secondTimer;
+    bool resetter = false;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +39,12 @@ public class SecurityCamScript : MonoBehaviour
     {
         if (CamOneActive)
         {
-            ReconnectingCam();
+            TimerReconnect();
+            if (resetter)
+            {
+                Reconnecting();
+                resetter = false;
+            }
         }
     }
 
@@ -44,6 +53,8 @@ public class SecurityCamScript : MonoBehaviour
         secCamOne.depth = 2.0f;
         secCamTwo.depth = 0f;
 
+        CamOneUI.SetActive(true);
+        CamTwoUI.SetActive(false);
         CamOneActive = true;
     }
 
@@ -52,11 +63,25 @@ public class SecurityCamScript : MonoBehaviour
         secCamOne.depth = 0f;
         secCamTwo.depth = 2.0f;
 
+        CamOneUI.SetActive(false);
+        CamTwoUI.SetActive(true);
         CamOneActive = false;
         CamOneAuxUI.SetActive(false);
     }
 
-    void ReconnectingCam()
+    public void ExitConsole()
+    {
+        CamOneUI.SetActive(false);
+        CamTwoUI.SetActive(false);
+        CamOneAuxUI.SetActive(false);
+
+        secCamOne.depth = 0f;
+        secCamTwo.depth = 0f;
+
+        player.GetComponent<PlayerMovement>().offInteract();
+    }
+
+    void TimerReconnect()
     {
         if (timer > 0)
         {
@@ -65,7 +90,22 @@ public class SecurityCamScript : MonoBehaviour
         }
         if (timer <= 0)
         {
+            Debug.Log("set");
+            resetter = true;
+            secondTimer = Random.Range(0.25f, 1.0f);
             CamOneAuxUI.SetActive(true);
+        }
+    }
+
+    void Reconnecting()
+    {
+        if (secondTimer > 0)
+        {
+            secondTimer -= Time.deltaTime;
+        }
+        if (secondTimer <= 0)
+        {
+            Debug.Log("Reset");
             timer = Random.Range(minTime, maxTime);
         }
     }
