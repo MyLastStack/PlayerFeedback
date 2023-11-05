@@ -5,7 +5,6 @@ using UnityEngine;
 public class DoorAnimationTrigger : MonoBehaviour
 {
     [SerializeField] Animator animator;
-    [SerializeField] AudioSource audioSource;
     public bool playing;
     public bool alreadyPlayed;
     void Start()
@@ -21,11 +20,6 @@ public class DoorAnimationTrigger : MonoBehaviour
             animator.Play("Base Layer.GameSceneDoor", 0);
             alreadyPlayed = true;
         }
-    }
-
-    public void playAudio()
-    {
-        audioSource.Play();
     }
 
     private void OnTriggerEnter(Collider other)
