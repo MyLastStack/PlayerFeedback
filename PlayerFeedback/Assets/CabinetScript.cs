@@ -8,6 +8,11 @@ public class CabinetScript : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] ParticleSystem smoke;
 
+    [SerializeField] Animator jumpscare;
+
+    bool startScare = false;
+    float timer = 5.0f;
+
     void Start()
     {
         
@@ -19,6 +24,24 @@ public class CabinetScript : MonoBehaviour
         {
             animator.SetBool("fall", true);
             smoke.Play();
+            startScare = true;
+        }
+
+        if (startScare)
+        {
+            countdownTimer();
+        }
+    }
+
+    void countdownTimer()
+    {
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+        }
+        if (timer <= 0)
+        {
+            jumpscare.SetBool("spook", true);
         }
     }
 }
