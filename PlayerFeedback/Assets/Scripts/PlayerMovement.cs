@@ -6,9 +6,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] InputAction interactAction;
+    [SerializeField] InputAction interactAction, pauseAction;
     public bool interactable;
     public bool interacting;
+    public bool pausing;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -33,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     {
         interactable = false;
         interacting = false;
+        pausing = false;
 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
@@ -40,10 +42,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!interacting)
+        if (!interacting || !pausing)
         {
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
 
             KeyboardInputs();
             SpeedControl();
@@ -55,6 +56,18 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 rb.drag = 0;
+            }
+        }
+
+        if (pauseAction.WasPressedThisFrame())
+        {
+            if (pausing)
+            {
+                UnpausingScene();
+            }
+            else
+            {
+                PausingScene();
             }
         }
     }
@@ -73,6 +86,16 @@ public class PlayerMovement : MonoBehaviour
         {
             onInteract();
         }
+    }
+
+    public void PausingScene()
+    {
+        pausing = true;
+    }
+
+    public void UnpausingScene()
+    {
+        pausing = false;
     }
 
     #region Player Movement
@@ -111,11 +134,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         interactAction.Enable();
+        pauseAction.Enable();
     }
 
     private void OnDisable()
     {
         interactAction.Disable();
+        pauseAction.Disable();
     }
     #endregion
 }
