@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+
         camCanvas.SetActive(false);
 
         interactable = false;

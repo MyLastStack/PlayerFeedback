@@ -13,6 +13,8 @@ public class PauseMenuScript : MonoBehaviour
 
     private void Start()
     {
+        Resume();
+
         isPaused = false;
         pauseMenuUI.SetActive(false);
     }
