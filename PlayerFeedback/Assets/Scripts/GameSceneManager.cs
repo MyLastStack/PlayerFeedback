@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
+    public void EndCredit()
+    {
+        SceneManager.LoadScene(2);
+    }
+
     public static void LoadStartMenu()
     {
         SceneManager.LoadScene(0);
@@ -12,6 +17,10 @@ public class GameSceneManager : MonoBehaviour
     public static void LoadPlayScene()
     {
         SceneManager.LoadScene(1);
+    }
+    public static void LoadEndScene()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public static void ExitGame()
