@@ -48,6 +48,11 @@ public class PauseMenuScript : MonoBehaviour
         pauseMenuUI.SetActive(true);
     }
 
+    public void TimeScaleReset()
+    {
+        Time.timeScale = 1.0f;
+    }
+
     private void OnEnable()
     {
         pauseAction.Enable();
