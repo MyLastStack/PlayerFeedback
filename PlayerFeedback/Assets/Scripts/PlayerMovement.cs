@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
 
         interactable = false;
         interacting = false;
-        pausing = false;
 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
