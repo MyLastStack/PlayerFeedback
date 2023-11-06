@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] GameObject camCanvas;
     public bool interactable;
     public bool interacting;
-    public bool pausing;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -45,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (!interacting)
+        if (!interacting || PauseMenuScript.isPaused)
         {
             grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
@@ -77,16 +76,6 @@ public class PlayerMovement : MonoBehaviour
         {
             onInteract();
         }
-    }
-
-    public void PausingScene()
-    {
-        pausing = true;
-    }
-
-    public void UnpausingScene()
-    {
-        pausing = false;
     }
 
     #region Player Movement
